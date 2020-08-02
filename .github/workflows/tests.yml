@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm install
       - name: Run tests
-        working-directory: ./ticketing/auth
-        run: npm install & npm run test:ci
+        run: npm run test:ci
