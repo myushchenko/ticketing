@@ -10,4 +10,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run tests
         working-directory: ./ticketing/auth
-        run: cd auth && npm install & npm run test:ci
+        run: npm install & npm run test:ci
