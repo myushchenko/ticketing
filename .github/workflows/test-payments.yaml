@@ -1,0 +1,15 @@
+name: payments-auth
+
+on: 
+  pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies and run unit test
+        run: |
+          cd ./payments
+          npm ci
+          npm run test:ci
