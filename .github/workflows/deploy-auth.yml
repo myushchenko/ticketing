@@ -12,7 +12,7 @@ jobs:
      runs-on: ubuntu-latest
      steps:
       - uses: actions/checkout@v2
-      - name: install dependencies and build docker
+      - name: install dependencies, build and push docker
         run: |
           cd ./auth
           docker build -t myushchenko/auth .
@@ -21,3 +21,8 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
       - run: docker push myushchenko/auth
+      - uses: digitalocean/action-doctl@v2
+        with:
+          toke: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save ticketing
+      - run: kubectl rollout restart deployment auth-depl
